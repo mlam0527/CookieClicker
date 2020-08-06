@@ -5,11 +5,13 @@
  **************/
 
 function updateCoffeeView(coffeeQty) {
-  // your code here
+  document.getElementById('coffee_counter').innerText = coffeeQty;
 }
 
+
 function clickCoffee(data) {
-  // your code here
+  data.coffee = data.coffee + 1;
+  document.getElementById('coffee_counter').innerText = data.coffee;
 }
 
 /**************
@@ -17,15 +19,35 @@ function clickCoffee(data) {
  **************/
 
 function unlockProducers(producers, coffeeCount) {
-  // your code here
+  producers.forEach(prodObj => {
+    if (coffeeCount >= (prodObj.price/2)) {
+      prodObj.unlocked = true;
+    }
+  });
 }
 
 function getUnlockedProducers(data) {
-  // your code here
+  return data.producers.filter(obj => obj.unlocked === true);
 }
 
 function makeDisplayNameFromId(id) {
-  // your code here
+  let arr = [...id];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === '_') {
+      let char = arr[i + 1].toUpperCase();
+      arr.splice(i + 1, 1, char);
+    }
+  }
+  return arr
+    .map((char, index) => {
+      if (index === 0) {
+        return char.toUpperCase();
+      } else if (char === '_') {
+        return char = ' ';
+      } else {
+        return char;
+      }})
+    .join('');
 }
 
 // You shouldn't need to edit this function-- its tests should pass once you've written makeDisplayNameFromId
@@ -50,7 +72,9 @@ function makeProducerDiv(producer) {
 }
 
 function deleteAllChildNodes(parent) {
-  // your code here
+  while (parent.firstChild){
+      parent.removeChild(parent.firstChild);
+  }
 }
 
 function renderProducers(data) {
