@@ -78,7 +78,15 @@ function deleteAllChildNodes(parent) {
 }
 
 function renderProducers(data) {
-  // your code here
+  const producerArr = data.producers;
+  const prodCont =  document.getElementById('producer_container');
+  const prodContChildren =  document.getElementsByClassName('producer-column');
+  unlockProducers(producerArr, data.coffee);
+  const producerInfo = producerArr
+    .filter((producerElement) => producerElement.unlocked === true)
+    .map((producerInfo) => makeProducerDiv(producerInfo));
+  deleteAllChildNodes(prodCont);
+  producerInfo.forEach((contDiv) => prodCont.appendChild(contDiv));
 }
 
 /**************
