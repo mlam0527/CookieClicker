@@ -60,7 +60,7 @@ function makeProducerDiv(producer) {
   const html = `
   <div class="producer-column">
     <div class="producer-title">${displayName}</div>
-    <button type="button" id="buy_${producer.id}">Purchase</button>
+    <button type="button" id="buy_${producer.id}">Buy</button>
   </div>
   <div class="producer-column">
     <div>Quantity: ${producer.qty}</div>
