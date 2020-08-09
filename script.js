@@ -60,7 +60,7 @@ function makeProducerDiv(producer) {
   const html = `
   <div class="producer-column">
     <div class="producer-title">${displayName}</div>
-    <button type="button" id="buy_${producer.id}">Buy</button>
+    <button type="button" id="buy_${producer.id}">Purchase</button>
   </div>
   <div class="producer-column">
     <div>Quantity: ${producer.qty}</div>
@@ -171,6 +171,7 @@ if (typeof process === 'undefined') {
   // Get starting data from the window object
   // (This comes from data.js)
   const data = window.data;
+  
 
   // Add an event listener to the giant coffee emoji
   const bigCoffee = document.getElementById('big_coffee');
