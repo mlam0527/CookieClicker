@@ -129,17 +129,28 @@ function attemptToBuyProducer(data, producerId) {
     producerIdInfo.qty++;
     data.coffee = data.coffee - producerIdInfo.price;
     producerIdInfo.price = updatePrice(producerIdInfo.price);
-    data.totalCPS = updateCPSView(producerIdInfo.cps);
+    data.totalCPS = data.totalCPS + producerIdInfo.cps;
+    data.totalCPS = updateCPSView(data.totalCPS);
+    renderProducers(data);
+    updateCoffeeView(data.coffee);
+  } else {
+    window.alert('Not enough coffee!')
   }
   return prodBuy;
 }
 
 function buyButtonClick(event, data) {
-  attemptToBuyProducer(data, producerId)
+  let eventIdName = event.target.id;
+  if (event.target.tagName === 'BUTTON') {
+    const name = eventIdName.split('_').slice(1).join('_');
+    attemptToBuyProducer(data, name);
+  }
 }
 
 function tick(data) {
-  
+  data.coffee = data.coffee + data.totalCPS
+  updateCoffeeView(data.coffee);
+  renderProducers(data);
 }
 
 /*************************

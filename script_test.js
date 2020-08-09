@@ -581,7 +581,7 @@ it("does not modify data in any way if the player tries to buy something they ca
     });
 
     // Hint: use the function you've already written!
-xit('mutates the data only if the player can afford the producer', function() {
+it('mutates the data only if the player can afford the producer', function() {
       // buyButtonClick accepts a browser event argument. Here we simulate this by creating an event object ourselves we'll only give that fake event bject the properties that are relevant for our purposes
 
       // This purchase should suceed
@@ -598,7 +598,7 @@ xit('mutates the data only if the player can afford the producer', function() {
     });
 
     // Hint: see https://developer.mozilla.org/en-US/docs/Web/API/Window/alert
-xit('shows an alert box with the message "Not enough coffee!" only if the player cannot afford the producer', function() {
+it('shows an alert box with the message "Not enough coffee!" only if the player cannot afford the producer', function() {
       const spyOnAlert = sinon.spy(window, 'alert');
 
       // This purchase should fail
@@ -616,7 +616,7 @@ xit('shows an alert box with the message "Not enough coffee!" only if the player
     });
 
     // Notice that at the bottom of script.js we attach an event listener that calls `buyButtonClick` not just to a buy button but to the entire producer container. Here we test that you filter clicks so that the function pays attention only to clicks on buy buttons
-xit("does not modify data or show an alert box if the event passed in doesn't represent a click on a button element", function() {
+it("does not modify data or show an alert box if the event passed in doesn't represent a click on a button element", function() {
       const spyOnAlert = sinon.spy(window, 'alert');
       const snapshot = JSON.stringify(data);
 
@@ -630,7 +630,7 @@ xit("does not modify data or show an alert box if the event passed in doesn't re
     });
 
     // Hint: call a function you've already written!
-xit('renders the updated producers when a purchase succeeds', function() {
+it('renders the updated producers when a purchase succeeds', function() {
       const event = { target: { tagName: 'BUTTON', id: 'buy_producer_A' } };
       code.buyButtonClick(event, data);
       const producerContainer = document.getElementById('producer_container');
@@ -638,7 +638,7 @@ xit('renders the updated producers when a purchase succeeds', function() {
     });
 
     // Hint: call a function you've already written!
-xit('updates the coffee count on the DOM, reflecting that coffee has been spent, when a purchase succeeds', function() {
+it('updates the coffee count on the DOM, reflecting that coffee has been spent, when a purchase succeeds', function() {
       const event = { target: { tagName: 'BUTTON', id: 'buy_producer_A' } };
       code.buyButtonClick(event, data);
       const coffeeCounter = document.getElementById('coffee_counter');
@@ -646,7 +646,7 @@ xit('updates the coffee count on the DOM, reflecting that coffee has been spent,
     });
 
     // Hint: call a function you've already written!
-xit("updates the total CPS on the DOM, reflecting that the new producer's CPS has been added", function() {
+it("updates the total CPS on the DOM, reflecting that the new producer's CPS has been added", function() {
       const event = { target: { tagName: 'BUTTON', id: 'buy_producer_A' } };
       code.buyButtonClick(event, data);
       const cpsIndicator = document.getElementById('cps');
@@ -674,19 +674,19 @@ xit("updates the total CPS on the DOM, reflecting that the new producer's CPS ha
       };
     });
 
-xit('increases coffee count by the total CPS', function() {
+it('increases coffee count by the total CPS', function() {
       code.tick(data);
       expect(data.coffee).to.be.equal(100);
     });
 
     // Hint: use what you've written already! The tick function can be just a few lines
-xit('updates the dom to reflect this new coffee count', function() {
+it('updates the dom to reflect this new coffee count', function() {
       code.tick(data);
       const coffeeCounter = document.getElementById('coffee_counter');
       expect(coffeeCounter.innerText).to.equal(100);
     });
 
-xit('updates the dom to reflect any newly unlocked producers', function() {
+it('updates the dom to reflect any newly unlocked producers', function() {
       code.tick(data);
       const producerContainer = document.getElementById('producer_container');
       expect(producerContainer.childNodes.length).to.be.equal(2);
