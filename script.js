@@ -12,6 +12,7 @@ function updateCoffeeView(coffeeQty) {
 function clickCoffee(data) {
   data.coffee = data.coffee + 1;
   document.getElementById('coffee_counter').innerText = data.coffee;
+  renderProducers(data);
 }
 
 /**************
@@ -79,12 +80,14 @@ function deleteAllChildNodes(parent) {
 
 function renderProducers(data) {
   const producerArr = data.producers;
-  const prodCont =  document.getElementById('producer_container');
-  const prodContChildren =  document.getElementsByClassName('producer-column');
+  const prodCont = document.getElementById('producer_container');
+
   unlockProducers(producerArr, data.coffee);
+
   const producerInfo = producerArr
     .filter((producerElement) => producerElement.unlocked === true)
-    .map((producerInfo) => makeProducerDiv(producerInfo));
+    .map((producerElement) => makeProducerDiv(producerElement));
+
   deleteAllChildNodes(prodCont);
   producerInfo.forEach((contDiv) => prodCont.appendChild(contDiv));
 }
@@ -94,31 +97,49 @@ function renderProducers(data) {
  **************/
 
 function getProducerById(data, producerId) {
-  // your code here
+  const producerArr = data.producers;
+  return  producerArr.filter(prodObj => prodObj.id === producerId)[0];
 }
 
 function canAffordProducer(data, producerId) {
-  // your code here
+  const prodObj = getProducerById(data, producerId); 
+  if (data.coffee >= prodObj.price) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 function updateCPSView(cps) {
-  // your code here
+  let cpers = document.getElementById('cps');
+  cpers.innerText = cps;
+  return cps;
 }
 
 function updatePrice(oldPrice) {
-  // your code here
+  return Math.floor(oldPrice * 1.25);
 }
 
 function attemptToBuyProducer(data, producerId) {
-  // your code here
+ 
+  prodBuy = canAffordProducer(data, producerId);
+  
+  const producerIdInfo = getProducerById(data, producerId);
+  if (prodBuy) {
+    producerIdInfo.qty++;
+    data.coffee = data.coffee - producerIdInfo.price;
+    producerIdInfo.price = updatePrice(producerIdInfo.price);
+    data.totalCPS = updateCPSView(producerIdInfo.cps);
+  }
+  return prodBuy;
 }
 
 function buyButtonClick(event, data) {
-  // your code here
+  attemptToBuyProducer(data, producerId)
 }
 
 function tick(data) {
-  // your code here
+  
 }
 
 /*************************
